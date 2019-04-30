@@ -9,8 +9,7 @@ public class Click : MonoBehaviour
     {
         camera = GetComponent<Camera>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -21,7 +20,6 @@ public class Click : MonoBehaviour
             {
                 if (hit.collider.gameObject.GetComponent<BallBounce>())
                 {
-                    Debug.Log("Hello");
                     hit.collider.gameObject.GetComponent<BallBounce>().Bounce(-hit.normal * 100);
                 }
             }

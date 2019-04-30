@@ -109,7 +109,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &7363462329718987740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0e241d6ac080046bb294f969399f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decalMaterial: {fileID: 0}
   decalMesh: {fileID: 0}
   newVertices:
   - {x: 0, y: 0, z: 0}

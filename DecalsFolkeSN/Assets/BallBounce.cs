@@ -15,7 +15,6 @@ public class BallBounce : MonoBehaviour
     }
     IEnumerator waitforforce()
     {
-        //Debug.Log("Error: " + RandomForce);
         Vector3 randomStart = new Vector3(Random.Range(-1f, 1), 0, Random.Range(-1f, 1));
         yield return new WaitForSeconds(0.1f);
         Bounce(randomStart * 1000f);
@@ -24,9 +23,14 @@ public class BallBounce : MonoBehaviour
     {
         if (collision.gameObject.tag == "WallArea")
         {
-            Quaternion Qua = Quaternion.FromToRotation(Vector3.forward, collision.gameObject.GetComponent<MeshFilter>().mesh.normals[0]); 
-            Vector3 hitLocation = new Vector3(transform.position.x - GetComponent<MeshFilter>().mesh.bounds.extents.x, transform.transform.position.y - GetComponent<MeshFilter>().mesh.bounds.extents.x, transform.position.z - GetComponent<MeshFilter>().mesh.bounds.extents.x);
-            decalSpawner.AddDecals(Matrix4x4.TRS(hitLocation, Qua, Vector3.one));
+            Quaternion Qua = Quaternion.FromToRotation(Vector3.forward, collision.GetContact(0).normal);
+
+            Vector3 hitLocation = new Vector3(
+                collision.GetContact(0).point.x + (collision.GetContact(0).normal.x * 0.01f/*offset*/),
+                collision.GetContact(0).point.y + (collision.GetContact(0).normal.y * 0.01f/*offset*/),
+                collision.GetContact(0).point.z + (collision.GetContact(0).normal.z * 0.01f/*offset*/));
+
+            decalSpawner.DrawDecal(hitLocation, Qua);
         }
     }
     public void Bounce(Vector3 direction)
